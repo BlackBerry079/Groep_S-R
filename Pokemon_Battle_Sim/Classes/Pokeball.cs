@@ -14,9 +14,14 @@ namespace Pokemon_Battle_Sim
             this.pokemon = pokemon;
         }
 
-        public void open()
+        public string open()
         {
+            return " is released and uses ";
+        }
 
+        public string close()
+        {
+            return " is returned by ";
         }
     }
 }

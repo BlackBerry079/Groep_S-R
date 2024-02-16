@@ -6,7 +6,7 @@ namespace Pokemon_Battle_Sim
         public string name;
         public List<Pokeball> belt;
 
-        public Trainer(string name, int belt)
+        public Trainer(string name, List<Pokeball> belt)
         {
             this.name = name;
             this.belt = belt;
