@@ -3,72 +3,55 @@ namespace Pokemon_Battle_Sim
 {
     internal class Program
     {
-
         class Battle
         {
             public static void Main(string[] args)
             {
-                Pokemon charmander = new Pokemon("charmander", "Fire", "Water", "Growl");
-                Pokeball pokeball = new Pokeball(80, "Red", charmander);
-                Trainer trainer = new Trainer("", new List<Pokeball>(6));
+                Charmander charmander = new Charmander("charmander", "fire", "water");
+                Pokeball pokeball = new Pokeball(charmander);
+
+                Charmander release = pokeball.Open();
+                pokeball.Close(release);
+
                 Console.WriteLine("Welcome to the Pokemon Battle Simulator!");
+                Console.WriteLine("What is the name of the first trainer?");
+                string FirstName = Console.ReadLine();
+                Trainer trainer1 = new Trainer(FirstName);
+                Console.WriteLine($"Trainer 1 is called: {FirstName}");
 
-                while (true)
+                for (int i = 0; i < 6; i++)
                 {
-                    Console.WriteLine("What is the first trainers name?");
-                    String name1 = Console.ReadLine();
-                    Console.WriteLine("What is the second trainers name?");
-                    string name2 = Console.ReadLine();
-                    if (name1 != "" && name2 != "")
-                    {
-                        for (int i = 0; i < 7; i++)
-                        {
-                            Console.WriteLine(name1 + " throws his pokeball");
-                            Console.WriteLine(charmander.name + pokeball.open() + charmander.attack);
-                            Console.WriteLine(name2 + " throws his pokeball");
-                            Console.WriteLine(charmander.name + pokeball.open() + charmander.attack);
-                            Console.WriteLine(charmander.name + pokeball.close() + name1);
-                            Console.WriteLine(charmander.name + pokeball.close() + name2 + "\n");
-                        }
-                    }
-                    Console.WriteLine("Do you want to restart? (Type 'no' to quit)");
-                    String restart = Console.ReadLine();
-                    if (restart != "yes" && restart != "no")
-                    {
-                        Console.WriteLine("Type 'yes' or 'no'!");
-                    }
-                    else if (restart == "no")
-                    {
-                        break;
-                    }
+                    trainer1.TakePokeball(pokeball);
                 }
 
+                Console.WriteLine("What is the name of the first trainer?");
+                string SecondName = Console.ReadLine();
+                Trainer trainer2 = new Trainer(SecondName);
+                Console.WriteLine($"Trainer 2 is called: {SecondName}");
 
-/*              while (true)
+                for (int i = 0; i < 6; i++)
                 {
-                    Console.WriteLine("What do you want to call your charmander");
-                    string name = Console.ReadLine();
-                    charmander.name = name;
-                    if (name != "")
-                    {
-                        for (int i = 0; i < 11; i++)
-                        {
-                            Console.WriteLine(charmander.name + " used " + charmander.attack);
-                            Console.WriteLine(charmander.growl() + "\n");
-                        }
-                        Console.WriteLine("Do you want to change the name of your " + charmander.name + "? (Type 'no' to quit)");
-                        string repeat = Console.ReadLine();
-                        if (repeat != "yes" && repeat != "no")
-                        {
-                            Console.WriteLine("Type 'yes' or 'no'!");
-                        }
-                        else if (repeat == "no")
-                        {
-                            break;
-                        }
-                    }
-                }*/
+                    trainer2.TakePokeball(pokeball);
                 }
+
+                for (int i = 0; i < 6; i++)
+                {
+                    Charmander first = trainer1.ReleasePokemon();
+                    Charmander second = trainer2.ReleasePokemon();
+
+                    Console.WriteLine($"The Charmander of {FirstName} is released");
+                    Console.WriteLine($"The Charmander uses growl: '{first.Growl()}' ");
+                    Console.WriteLine($"The Charmander of {SecondName} is released");
+                    Console.WriteLine($"The Charmander uses growl: '{second.Growl()}' \n");
+
+                    trainer1.ReturnPokemon(first);
+                    trainer2.ReturnPokemon(second);
+
+                    Console.WriteLine($"The Charmander of {FirstName} is returned");
+                    Console.WriteLine($"The Charmander of {SecondName} is returned \n");
+                }
+
+            }
         }
     }
 }
