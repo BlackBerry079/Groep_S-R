@@ -1,27 +1,31 @@
 using System;
 namespace Pokemon_Battle_Sim
 {
-    class Pokeball
+
+    internal class Pokeball
     {
-        public int catchRate;
-        public string color;
-        public Pokemon pokemon;
+        public Charmander charmander;
+        public bool CharmanderInside;
 
-        public Pokeball(int catchRate, string color, Pokemon pokemon)
+        public Pokeball(Charmander charmander)
         {
-            this.catchRate = catchRate;
-            this.color = color;
-            this.pokemon = pokemon;
+            this.charmander = charmander;
+            this.CharmanderInside = true;
         }
 
-        public string open()
+        public Charmander Open()
         {
-            return " is released and uses ";
+            return this.charmander;
         }
 
-        public string close()
+        public void Close(Charmander charmander)
         {
-            return " is returned by ";
+            this.charmander = charmander;
+        }
+
+        public bool GetCharmander()
+        {
+            return CharmanderInside;
         }
     }
 }
